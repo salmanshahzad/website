@@ -1,0 +1,19 @@
+{
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.html",
+    "scripts": {
+        "build": "gulp"
+    },
+    "author": "Salman",
+    "license": "MIT",
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.2.0",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^6.1.0",
+        "gulp-images-resizer": "0.0.7",
+        "gulp-terser": "^1.2.0"
+    }
+}
