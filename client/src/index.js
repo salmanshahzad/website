@@ -1,5 +1,9 @@
 stickybits("#projects-header");
 
+AOS.init({
+    offset: 300
+});
+
 const modal = new tingle.modal();
 modal.setContent(`
 <div style="font-family: 'Raleway', sans-serif;">
