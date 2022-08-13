@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Alata", sans-serif;
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .title {
+  font-size: 4rem;
+  text-align: center;
+}
+
+header .subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+header .icons {
+  display: flex;
+  gap: 1rem;
+}
+
+section h2 {
+  margin-bottom: 1rem;
+}
+
+.project {
+  display: flex;
+  gap: 3rem;
+}
+
+.project img {
+  width: 200px;
+}
+
+.project .title {
+  font-weight: bold;
+}
+
+.project a,
+.project a:visited {
+  color: black;
+}
