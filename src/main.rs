@@ -5,7 +5,7 @@ use axum_extra::routing::SpaRouter;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().merge(SpaRouter::new("/public", "public"));
+    let app = Router::new().merge(SpaRouter::new("/", "public"));
 
     let port = env::var("PORT")
         .ok()
