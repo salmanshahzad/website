@@ -1,30 +1,20 @@
-#[macro_use]
-extern crate rocket;
+use std::{env, net::SocketAddr};
 
-use std::env;
-use std::net::Ipv4Addr;
+use axum::{Router, Server};
+use axum_extra::routing::SpaRouter;
 
-use rocket::config::Config;
-use rocket::fs::FileServer;
-use rocket::response::Redirect;
+#[tokio::main]
+async fn main() {
+    let app = Router::new().merge(SpaRouter::new("/public", "public"));
 
-#[launch]
-fn rocket() -> _ {
-    let config = Config {
-        address: Ipv4Addr::new(0, 0, 0, 0).into(),
-        port: env::var("PORT")
-            .ok()
-            .and_then(|port| port.parse::<u16>().ok())
-            .expect("Invalid PORT environment variable"),
-        ..Config::default()
-    };
+    let port = env::var("PORT")
+        .ok()
+        .and_then(|port| port.parse::<u16>().ok())
+        .expect("Invalid PORT environment variable");
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    let server = Server::bind(&addr).serve(app.into_make_service());
 
-    rocket::custom(&config)
-        .mount("/", FileServer::from("public"))
-        .register("/", catchers![not_found])
-}
-
-#[catch(404)]
-fn not_found() -> Redirect {
-    Redirect::to(uri!("/"))
+    if let Err(err) = server.await {
+        eprintln!("Server error: {err}");
+    }
 }
