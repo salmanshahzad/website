@@ -1,11 +1,11 @@
 use std::{env, net::SocketAddr};
 
 use axum::{Router, Server};
-use axum_extra::routing::SpaRouter;
+use tower_http::services::ServeDir;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().merge(SpaRouter::new("/", "public"));
+    let app = Router::new().nest_service("/", ServeDir::new("public"));
 
     let port = env::var("PORT")
         .ok()
