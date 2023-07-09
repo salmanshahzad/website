@@ -1,5 +1,5 @@
-FROM rust:1.68.1
+FROM golang:1.20.5
 WORKDIR /usr/src/app
 COPY . .
-RUN cargo build --release
-CMD ["cargo", "run", "--release"]
+RUN go build -o website src/main.go
+CMD ["./website"]
