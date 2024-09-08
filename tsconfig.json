@@ -1,0 +1,12 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowImportingTsExtensions": true,
+        "module": "ESNext",
+        "moduleDetection": "force",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "target": "ESNext"
+    },
+    "extends": ["@tsconfig/strictest"]
+}
