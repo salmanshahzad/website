@@ -1,11 +1,9 @@
-FROM oven/bun:1.1.27 AS build
+FROM rust:1.82.0 AS build
 WORKDIR /usr/src/app
-COPY bun.lockb package.json ./
-RUN bun install
 COPY . .
-RUN bun run build
+RUN cargo build --release
 
 FROM ubuntu:24.04
 WORKDIR /usr/src/app
-COPY --from=build /usr/src/app/website website
+COPY --from=build /usr/src/app/target/release/website website
 CMD ["./website"]
