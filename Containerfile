@@ -1,9 +1,10 @@
-FROM docker.io/rust:1.85.0 AS build
+FROM docker.io/alpine:3.21.3 AS build
+RUN apk add build-base make
 WORKDIR /usr/src/app
 COPY . .
-RUN cargo build --release
+RUN make LDFLAGS="-static"
 
-FROM docker.io/ubuntu:24.10
+FROM scratch
 WORKDIR /usr/src/app
-COPY --from=build /usr/src/app/target/release/website website
-CMD ["./website"]
+COPY --from=build /usr/src/app/server server
+CMD ["./server", "-d", "public", "-h", "0.0.0.0"]
